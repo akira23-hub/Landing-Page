@@ -3,8 +3,7 @@
 <head>
 <script>(function(s){s.dataset.zone='10258241',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <script>(function(s){s.dataset.zone='10260349',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<script src="https://3nbf4.com/act/files/tag.min.js?z=10260354" data-cfasync="false" async></script>
-
+<script>(function(s){s.dataset.zone='10258242',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Download Movie</title>
@@ -67,11 +66,12 @@
             transform: translateY(-5px); box-shadow: 0 15px 30px rgba(102,126,234,0.4);
         }
         .home-btn {
-            display: inline-block; padding: 12px 30px; background: #6c757d;
+            display: inline-block; padding: 12px 30px; background: #667eea;
             color: white; text-decoration: none; border-radius: 50px;
-            font-size: 16px; font-weight: 600; margin: 10px; transition: all 0.3s;
+            font-size: 16px; font-weight: 600; margin: 10px 0; transition: all 0.3s;
+            width: 100%; max-width: 250px;
         }
-        .home-btn:hover { background: #5a6268; transform: translateY(-3px); }
+        .home-btn:hover { background: #5a62a8; transform: translateY(-3px); }
         .ad-note {
             margin-top: 25px; padding: 15px; background: #e9ecef;
             border-radius: 10px; font-size: 14px; color: #666;
@@ -94,6 +94,11 @@
             background: #fdf2f2; padding: 10px; border-radius: 5px;
             display: none;
         }
+        .button-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
         @media (max-width: 768px) {
             body { padding: 10px; }
             .download-container { padding: 25px 20px; border-radius: 15px; }
@@ -102,7 +107,7 @@
             .timer-container { padding: 20px; }
             .movie-info { padding: 15px; }
             .download-btn { padding: 15px 30px; font-size: 18px; max-width: 100%; }
-            .home-btn { padding: 10px 20px; font-size: 14px; margin: 5px; }
+            .home-btn { padding: 10px 25px; font-size: 15px; max-width: 200px; }
         }
         @media (max-width: 480px) {
             .download-container { padding: 20px 15px; margin: 10px 0; }
@@ -112,6 +117,7 @@
             .movie-detail span:last-child { margin-top: 2px; font-weight: 500; }
             .download-btn { padding: 14px 25px; font-size: 16px; }
             .ad-note { font-size: 13px; padding: 12px; }
+            .home-btn { padding: 10px 20px; font-size: 14px; max-width: 180px; }
         }
     </style>
 </head>
@@ -159,11 +165,8 @@
             <i class="fas fa-exclamation-triangle"></i> Pop-up was blocked! Please allow pop-ups for this site and try again.
         </div>
         
-        <div style="margin-top: 30px;">
+        <div class="button-container">
             <a href="index.html" class="home-btn">
-                <i class="fas fa-home"></i> Back to Home
-            </a>
-            <a href="index.html" class="home-btn" style="background: #667eea;">
                 <i class="fas fa-film"></i> More Movies
             </a>
         </div>
@@ -173,20 +176,20 @@
         // ==================== CONFIGURATION ====================
         // REPLACE THESE WITH YOUR 5 ACTUAL MONETAG AD LINKS
         const monetagAdLinks = [
-            "https://your-monetag-link-1.com",
-            "https://your-monetag-link-2.com", 
-            "https://your-monetag-link-3.com",
-            "https://your-monetag-link-4.com",
-            "https://your-monetag-link-5.com"
+            "https://otieu.com/4/8251888",
+            "https://otieu.com/4/7512585", 
+            "https://otieu.com/4/8257954",
+            "https://otieu.com/4/1415254",
+            "https://otieu.com/4/7512545"
         ];
         
         // Your final safefile.cc download page
-        const FINAL_DOWNLOAD_PAGE = "https://safefile.cc/Container/TJ748Q3BOC.html";
+        const FINAL_DOWNLOAD_PAGE = "https://safefile.cc/Container/JQLRQNJR9H.html";
         
         // ==================== INITIAL SETUP ====================
         // Get movie name from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const movieName = urlParams.get('movie') || "Awesome Movie";
+        const movieName = urlParams.get('movie') || "Rewind";
         
         // DOM elements
         const countdownElement = document.getElementById('countdown');
@@ -199,7 +202,7 @@
         
         // Movie data (simplified - in production, get from localStorage or API)
         const movieData = {
-            size: "1.8 GB",
+            size: "709 MB",
             quality: "1080p HD",
             format: "MP4"
         };
