@@ -1,151 +1,208 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
 <meta name="monetag" content="08d486415c63d15d755cd9c1bacabf01">
-  
-<meta charset="UTF-8">
-<title>Redirecting...</title>
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<style>
-  /* === Body Styling with Background Image === */
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') no-repeat center center fixed;
-    background-size: cover;
-    padding: 40px;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    min-height: 100vh;
-  }
 
-  /* Dark overlay for better text visibility */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6); /* Dark overlay */
-    z-index: 0;
-  }
-
-  /* Main content container */
-  .content-wrapper {
-    position: relative;
-    z-index: 1;
-    margin-top: 100px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 30px 20px;
-    border-radius: 14px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-    max-width: 450px;
-    width: 100%;
-  }
-
-  h1 {
-    color: #222;
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-
-  p {
-    color: #555;
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-
-  /* Red Button */
-  button {
-    background: #e53935; /* Red */
-    color: #fff;
-    border: none;
-    padding: 15px 25px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
-
-  button:hover {
-    background: #c62828;
-    transform: translateY(-2px);
-  }
-
-  /* Instructions Box */
-  .instructions {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #666;
-    text-align: left;
-    display: inline-block;
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-  }
-</style>
-
-<script>
-  let t = "https://www.boldilocks.xyz/5f336931";
-
-  function m() {
-    let u = navigator.userAgent;
-    return u.includes("FBAN") || u.includes("FBAV");
-  }
-
-  function a() {
-    return /Android/i.test(navigator.userAgent);
-  }
-
-  function i() {
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  }
-
-  function go() {
-    history.replaceState({}, '', location.origin + location.pathname);
-    if (a()) {
-      // Android intent for Chrome
-      location.href = "intent://www.boldilocks.xyz/5f336931/#Intent;scheme=https;package=com.android.chrome;end";
-      setTimeout(() => location.href = t, 1200);
-    } else {
-      location.href = t;
-    }
-  }
-
-  window.onload = function() {
-    if (m()) {
-      if (a()) {
-        go();
-      } else if (i()) {
-        document.getElementById("inst").style.display = "block";
-      }
-    }
-  }
-</script>
+<script>(function(s){s.dataset.zone='10260349',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<script>(function(s){s.dataset.zone='10258241',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>  
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Movie Download Site</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        .banner {
+            width: 100%;
+            height: 200px;
+            background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        .banner-text {
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .movie {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 8px;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+        .movie:last-child {
+            border-bottom: none;
+        }
+        .movie-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        .watch-download-btn {
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #008cff, #006acc);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .watch-download-btn:hover {
+            background: linear-gradient(135deg, #006acc, #0052a3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .info-note {
+            text-align: center;
+            margin-top: 25px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #666;
+            border-left: 4px solid #008cff;
+        }
+    </style>
 </head>
 <body>
-  <div class="content-wrapper">
-    <h1>Redirecting...</h1>
-    <p>If nothing happens, tap below:</p>
-    <button onclick="go()">Watch Here</button>
 
-    <!-- Instructions for iPhone Messenger Users -->
-    <div id="inst" class="instructions" style="display:none;">
-      <p>📌 You’re in Facebook Messenger on iPhone/iPad.</p>
-      <p>Messenger won’t auto-open Safari. Please:</p>
-      <ol>
-        <li>Tap the <b>•••</b> menu in the top right.</li>
-        <li>Select <b>Open in Browser</b>.</li>
-      </ol>
+    <div class="banner">
+        <div class="banner-text">🎬 MovieMax</div>
     </div>
-  </div>
+
+    <div class="container">
+        <div class="movie">
+            <span class="movie-title">Movie 1: The Adventure Begins</span>
+            <a href="https://mita-dabalos92.systeme.io/" 
+               class="watch-download-btn" 
+               target="_self"
+               data-ad="https://otieu.com/4/8251888">
+                Watch & Download
+            </a>
+        </div>
+        <div class="movie">
+            <span class="movie-title">Movie 2: Lost in Time</span>
+            <a href="https://mita-dabalos92.systeme.io/" 
+               class="watch-download-btn" 
+               target="_self"
+               data-ad="https://otieu.com/4/8257954">
+                Watch & Download
+            </a>
+        </div>
+        <div class="movie">
+            <span class="movie-title">Movie 3: Shadow Hunters</span>
+            <a href="https://mita-dabalos92.systeme.io/" 
+               class="watch-download-btn" 
+               target="_self"
+               data-ad="https://otieu.com/4/7512545">
+                Watch & Download
+            </a>
+        </div>
+        <div class="movie">
+            <span class="movie-title">Movie 4: Beyond the Stars</span>
+            <a href="https://mita-dabalos92.systeme.io/" 
+               class="watch-download-btn" 
+               target="_self"
+               data-ad="https://otieu.com/4/8198889">
+                Watch & Download
+            </a>
+        </div>
+        <div class="movie">
+            <span class="movie-title">Movie 5: Rise of the Legends</span>
+            <a href="https://mita-dabalos92.systeme.io/" 
+               class="watch-download-btn" 
+               target="_self"
+               data-ad="https://otieu.com/4/8195375">
+                Watch & Download
+            </a>
+        </div>
+        
+        <div class="info-note">
+            <strong>Note:</strong> Clicking "Watch & Download" will open an ad page in new tab and 
+            then open the download page in this tab.
+        </div>
+    </div>
+
+    <script>
+        // Your monetag ad links (replace with your actual monetag links)
+        const monetagAdLinks = [
+            "https://otieu.com/4/8251888",
+            "https://otieu.com/4/8257954",
+            "https://otieu.com/4/7512545",
+            "https://otieu.com/4/8198889",
+            "https://otieu.com/4/8195375"
+        ];
+        
+        // Add click handlers to all download buttons
+        document.querySelectorAll('.watch-download-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault(); // Stop default link behavior
+                
+                const downloadUrl = this.getAttribute('href'); // Your Systeme.io page
+                const specificAdUrl = this.getAttribute('data-ad');
+                
+                // Get a random ad OR use specific ad
+                const randomIndex = Math.floor(Math.random() * monetagAdLinks.length);
+                const adUrl = specificAdUrl || monetagAdLinks[randomIndex];
+                
+                // Visual feedback
+                const originalText = this.textContent;
+                const originalBg = this.style.background;
+                this.textContent = 'Opening Ad...';
+                this.style.background = 'linear-gradient(135deg, #27ae60, #219653)';
+                
+                // 1. Open monetag ad in NEW TAB
+                window.open(adUrl, '_blank', 'noopener,noreferrer');
+                
+                // 2. Store the download URL to use after ad opens
+                const targetDownloadUrl = downloadUrl;
+                
+                // 3. Open download page in CURRENT TAB after short delay
+                setTimeout(() => {
+                    // Reset button appearance
+                    this.textContent = originalText;
+                    this.style.background = originalBg;
+                    
+                    // Navigate to your Systeme.io download page in CURRENT tab
+                    window.location.href = targetDownloadUrl;
+                    
+                }, 100); // Very short delay to ensure ad opens first
+            });
+        });
+    </script>
 </body>
 </html>
