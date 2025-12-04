@@ -52,24 +52,66 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
+        .search-container {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+        }
+        .search-bar {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .search-bar:focus {
+            border-color: #008cff;
+            box-shadow: 0 0 0 3px rgba(0, 140, 255, 0.2);
+        }
+        
+        /* Movie item layout - FLEX for desktop, COLUMN for mobile */
         .movie {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 8px;
+            padding: 15px 10px;
             border-bottom: 1px solid #ddd;
             font-size: 14px;
+            transition: background-color 0.2s;
+            gap: 15px;
+        }
+        .movie:hover {
+            background-color: #f9f9f9;
         }
         .movie:last-child {
             border-bottom: none;
+        }
+        
+        /* Movie title styling - ellipsis for long text */
+        .movie-title-container {
+            flex: 1;
+            min-width: 200px;
+            overflow: hidden;
         }
         .movie-title {
             font-size: 16px;
             font-weight: bold;
             color: #333;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
+        
+        /* Button styling - fixed width for consistency */
         .watch-download-btn {
-            padding: 8px 20px;
+            padding: 10px 20px;
             background: linear-gradient(135deg, #008cff, #006acc);
             color: #fff;
             border: none;
@@ -80,12 +122,17 @@
             font-weight: bold;
             transition: all 0.3s ease;
             display: inline-block;
+            white-space: nowrap;
+            min-width: 140px;
+            text-align: center;
+            flex-shrink: 0;
         }
         .watch-download-btn:hover {
             background: linear-gradient(135deg, #006acc, #0052a3);
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
+        
         .info-note {
             text-align: center;
             margin-top: 25px;
@@ -96,6 +143,140 @@
             color: #666;
             border-left: 4px solid #008cff;
         }
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .pagination-btn {
+            padding: 8px 15px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+        .pagination-btn:hover {
+            background: #e0e0e0;
+        }
+        .pagination-btn.active {
+            background: linear-gradient(135deg, #008cff, #006acc);
+            color: white;
+            border-color: #008cff;
+        }
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+            font-size: 16px;
+            display: none;
+        }
+        .movie-count {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .banner {
+                height: 150px;
+                font-size: 24px;
+            }
+            
+            .search-bar {
+                font-size: 14px;
+                padding: 10px 16px;
+            }
+            
+            .movie {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+                padding: 12px 0;
+                text-align: center; /* Center content in mobile column */
+            }
+            
+            .movie-title-container {
+                min-width: 100%;
+                width: 100%;
+            }
+            
+            .movie-title {
+                font-size: 15px;
+                -webkit-line-clamp: 3;
+                text-align: center; /* Center the title text on mobile */
+            }
+            
+            .watch-download-btn {
+                width: 100%;
+                min-width: 100%;
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+            
+            .pagination-btn {
+                padding: 8px 12px;
+                font-size: 13px;
+                margin: 2px;
+            }
+            
+            .info-note {
+                font-size: 11px;
+                padding: 8px;
+            }
+            
+            .movie-count {
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .banner {
+                height: 120px;
+                font-size: 20px;
+            }
+            
+            .search-bar {
+                font-size: 13px;
+                padding: 8px 14px;
+            }
+            
+            .movie-title {
+                font-size: 14px;
+            }
+            
+            .movie-count {
+                font-size: 13px;
+            }
+            
+            .pagination-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+        }
+        
+        /* Desktop-only styles (for left-aligned titles) */
+        @media (min-width: 769px) {
+            .movie-title {
+                text-align: left; /* Ensure left alignment on desktop */
+            }
+        }
     </style>
 </head>
 <body>
@@ -105,118 +286,31 @@
     </div>
 
     <div class="container">
-        <div class="movie">
-            <span class="movie-title">Rewind 2025</span>
-            <a href="https://watch.boldilocks.xyz/rewind" 
-               class="watch-download-btn" 
-               target="_self"
-               data-ad="https://otieu.com/4/8251888">
-                Watch & Download
-            </a>
-        </div>
-        <div class="movie">
-            <span class="movie-title">Kapag Tumayo ang Testigo</span>
-            <a href="https://watch.boldilocks.xyz/kapagtumayoangtestigo.html" 
-               class="watch-download-btn" 
-               target="_self"
-               data-ad="https://otieu.com/4/8257954">
-                Watch & Download
-            </a>
-        </div>
-        <div class="movie">
-            <span class="movie-title">Mayumi</span>
-            <a href="https://watch.boldilocks.xyz/mayumi.html"
-               class="watch-download-btn" 
-               target="_self"
-               data-ad="https://otieu.com/4/7512545">
-                Watch & Download
-            </a>
-        </div>
-        <div class="movie">
-            <span class="movie-title">Bangkera</span>
-            <a href="https://watch.boldilocks.xyz/bangkera.html" 
-               class="watch-download-btn"
-               target="_self"
-               data-ad="https://otieu.com/4/8198889">
-                Watch & Download
-            </a>
-        </div>
-        <div class="movie">
-            <span class="movie-title">Elevator Lady</span>
-            <a href="https://watch.boldilocks.xyz/elevatorlady.html" 
-               class="watch-download-btn" 
-               target="_self"
-               data-ad="https://otieu.com/4/8195375">
-                Watch & Download
-            </a>
-        </div>
-
-   <div class="movie">
-            <span class="movie-title">Climax</span>
-            <a href="https://watch.boldilocks.xyz/climax.html" 
-               class="watch-download-btn" 
-               target="_self"
-               data-ad="https://otieu.com/4/8251888">
-                Watch & Download
-            </a>
-        </div>
-
- <div class="movie">
-            <span class="movie-title">Salsa Ni L</span>
-            <a href="https://watch.boldilocks.xyz/salsanil.html" 
-               class="watch-download-btn" 
-               target="_self"
-               data-ad="https://otieu.com/4/8195375">
-                Watch & Download
-            </a>
-        </div>
-
- <div class="movie">
-            <span class="movie-title">Kalakal</span>
-            <a href="https://watch.boldilocks.xyz/kalakal.html" 
-               class="watch-download-btn" 
-               target="_self"
-               data-ad="https://otieu.com/4/8198889">
-                Watch & Download
-            </a>
-        </div>
-
- <div class="movie">
-            <span class="movie-title">Tusok Tusok</span>
-            <a href="https://watch.boldilocks.xyz/tusoktusok.html" 
-               class="watch-download-btn" 
-               target="_self"
-               data-ad="https://otieu.com/4/8195375">
-                Watch & Download
-            </a>
-        </div>
-
- <div class="movie">
-            <span class="movie-title">Tatsulok</span>
-            <a href="https://watch.boldilocks.xyz/tatsulok.html" 
-               class="watch-download-btn" 
-               target="_self"
-               data-ad="https://otieu.com/4/8251888">
-                Watch & Download
-            </a>
+        <div class="search-container">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-bar" 
+                placeholder="Search for movies by title..."
+                autocomplete="off"
+            />
         </div>
         
- <div class="movie">
-            <span class="movie-title">Donselya</span>
-            <a href="https://watch.boldilocks.xyz/donselya.html" 
-               class="watch-download-btn" 
-               target="_self"
-               data-ad="https://otieu.com/4/8257954">
-                Watch & Download
-            </a>
+        <div class="movie-count">
+            Showing <span id="currentCount">0</span> of <span id="totalCount">0</span> movies
         </div>
-
-
         
+        <div id="moviesList">
+            <!-- Movies will be dynamically inserted here -->
+        </div>
         
-
-
+        <div id="noResults" class="no-results">
+            No movies found matching your search.
+        </div>
         
+        <div class="pagination-container" id="pagination">
+            <!-- Pagination buttons will be dynamically inserted here -->
+        </div>
         
         <div class="info-note">
             <strong>Note:</strong> Clicking "Watch & Download" will open an ad page in new tab and 
@@ -225,7 +319,26 @@
     </div>
 
     <script>
-        // Your monetag ad links (replace with your actual monetag links)
+        // Movie data array
+        const movies = [
+            { title: "Rewind 2025", url: "https://watch.boldilocks.xyz/rewind", ad: "https://otieu.com/4/8251888" },
+            { title: "Kapag Tumayo ang Testigo", url: "https://watch.boldilocks.xyz/kapagtumayoangtestigo.html", ad: "https://otieu.com/4/8257954" },
+            { title: "Mayumi", url: "https://watch.boldilocks.xyz/mayumi.html", ad: "https://otieu.com/4/7512545" },
+            { title: "Bangkera", url: "https://watch.boldilocks.xyz/bangkera.html", ad: "https://otieu.com/4/8198889" },
+            { title: "Elevator Lady", url: "https://watch.boldilocks.xyz/elevatorlady.html", ad: "https://otieu.com/4/8195375" },
+            { title: "Climax", url: "https://watch.boldilocks.xyz/climax.html", ad: "https://otieu.com/4/8251888" },
+            { title: "Salsa Ni L", url: "https://watch.boldilocks.xyz/salsanil.html", ad: "https://otieu.com/4/8195375" },
+            { title: "Kalakal", url: "https://watch.boldilocks.xyz/kalakal.html", ad: "https://otieu.com/4/8198889" },
+            { title: "Tusok Tusok", url: "https://watch.boldilocks.xyz/tusoktusok.html", ad: "https://otieu.com/4/8195375" },
+            { title: "Tatsulok", url: "https://watch.boldilocks.xyz/tatsulok.html", ad: "https://otieu.com/4/8251888" },
+            { title: "Donselya", url: "https://watch.boldilocks.xyz/donselya.html", ad: "https://otieu.com/4/8257954" },
+            { title: "The Midnight Run", url: "https://watch.boldilocks.xyz/midnightrun.html", ad: "https://otieu.com/4/8251888" },
+            { title: "Last Summer", url: "https://watch.boldilocks.xyz/lastsummer.html", ad: "https://otieu.com/4/8195375" },
+            { title: "City Lights", url: "https://watch.boldilocks.xyz/citylights.html", ad: "https://otieu.com/4/8198889" },
+            { title: "Mystery Island", url: "https://watch.boldilocks.xyz/mysteryisland.html", ad: "https://otieu.com/4/7512545" }
+        ];
+
+        // Your monetag ad links
         const monetagAdLinks = [
             "https://otieu.com/4/8251888",
             "https://otieu.com/4/8257954",
@@ -234,42 +347,221 @@
             "https://otieu.com/4/8195375"
         ];
         
-        // Add click handlers to all download buttons
-        document.querySelectorAll('.watch-download-btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault(); // Stop default link behavior
-                
-                const downloadUrl = this.getAttribute('href'); // Your Systeme.io page
-                const specificAdUrl = this.getAttribute('data-ad');
-                
-                // Get a random ad OR use specific ad
-                const randomIndex = Math.floor(Math.random() * monetagAdLinks.length);
-                const adUrl = specificAdUrl || monetagAdLinks[randomIndex];
-                
-                // Visual feedback
-                const originalText = this.textContent;
-                const originalBg = this.style.background;
-                this.textContent = 'Opening Ad...';
-                this.style.background = 'linear-gradient(135deg, #27ae60, #219653)';
-                
-                // 1. Open monetag ad in NEW TAB
-                window.open(adUrl, '_blank', 'noopener,noreferrer');
-                
-                // 2. Store the download URL to use after ad opens
-                const targetDownloadUrl = downloadUrl;
-                
-                // 3. Open download page in CURRENT TAB after short delay
-                setTimeout(() => {
-                    // Reset button appearance
-                    this.textContent = originalText;
-                    this.style.background = originalBg;
-                    
-                    // Navigate to your Systeme.io download page in CURRENT tab
-                    window.location.href = targetDownloadUrl;
-                    
-                }, 100); // Very short delay to ensure ad opens first
+        // Global variables
+        let currentPage = 1;
+        const moviesPerPage = 10;
+        let filteredMovies = [...movies];
+        
+        // DOM Elements
+        const moviesList = document.getElementById('moviesList');
+        const paginationContainer = document.getElementById('pagination');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+        const currentCountSpan = document.getElementById('currentCount');
+        const totalCountSpan = document.getElementById('totalCount');
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMovies();
+            renderPagination();
+            updateCounts();
+            
+            // Add event listener for search
+            searchInput.addEventListener('input', handleSearch);
+            
+            // Add click handlers to all download buttons
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.classList.contains('watch-download-btn')) {
+                    handleDownloadClick(e);
+                }
             });
         });
+        
+        // Function to handle download button clicks
+        function handleDownloadClick(e) {
+            e.preventDefault();
+            
+            const button = e.target;
+            const downloadUrl = button.getAttribute('href');
+            const specificAdUrl = button.getAttribute('data-ad');
+            
+            // Get a random ad OR use specific ad
+            const randomIndex = Math.floor(Math.random() * monetagAdLinks.length);
+            const adUrl = specificAdUrl || monetagAdLinks[randomIndex];
+            
+            // Visual feedback
+            const originalText = button.textContent;
+            const originalBg = button.style.background;
+            button.textContent = 'Opening Ad...';
+            button.style.background = 'linear-gradient(135deg, #27ae60, #219653)';
+            button.style.pointerEvents = 'none';
+            
+            // 1. Open monetag ad in NEW TAB
+            window.open(adUrl, '_blank', 'noopener,noreferrer');
+            
+            // 2. Store the download URL to use after ad opens
+            const targetDownloadUrl = downloadUrl;
+            
+            // 3. Open download page in CURRENT TAB after short delay
+            setTimeout(() => {
+                // Reset button appearance
+                button.textContent = originalText;
+                button.style.background = originalBg;
+                button.style.pointerEvents = 'auto';
+                
+                // Navigate to your Systeme.io download page in CURRENT tab
+                window.location.href = targetDownloadUrl;
+                
+            }, 100);
+        }
+        
+        // Function to handle search
+        function handleSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                filteredMovies = [...movies];
+            } else {
+                filteredMovies = movies.filter(movie => 
+                    movie.title.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            currentPage = 1; // Reset to first page on search
+            renderMovies();
+            renderPagination();
+            updateCounts();
+            
+            // Show/hide no results message
+            if (filteredMovies.length === 0) {
+                noResults.style.display = 'block';
+                moviesList.style.display = 'none';
+            } else {
+                noResults.style.display = 'none';
+                moviesList.style.display = 'block';
+            }
+        }
+        
+        // Function to render movies for current page
+        function renderMovies() {
+            moviesList.innerHTML = '';
+            
+            const startIndex = (currentPage - 1) * moviesPerPage;
+            const endIndex = startIndex + moviesPerPage;
+            const moviesToShow = filteredMovies.slice(startIndex, endIndex);
+            
+            moviesToShow.forEach(movie => {
+                const movieElement = document.createElement('div');
+                movieElement.className = 'movie';
+                movieElement.innerHTML = `
+                    <div class="movie-title-container">
+                        <span class="movie-title">${movie.title}</span>
+                    </div>
+                    <a href="${movie.url}" 
+                       class="watch-download-btn" 
+                       target="_self"
+                       data-ad="${movie.ad}">
+                        Watch & Download
+                    </a>
+                `;
+                moviesList.appendChild(movieElement);
+            });
+        }
+        
+        // Function to render pagination buttons
+        function renderPagination() {
+            paginationContainer.innerHTML = '';
+            
+            const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
+            
+            if (totalPages <= 1) return;
+            
+            // Previous button
+            const prevButton = document.createElement('button');
+            prevButton.className = `pagination-btn ${currentPage === 1 ? 'disabled' : ''}`;
+            prevButton.textContent = '← Previous';
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderMovies();
+                    renderPagination();
+                    updateCounts();
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                }
+            });
+            paginationContainer.appendChild(prevButton);
+            
+            // Page number buttons
+            for (let i = 1; i <= totalPages; i++) {
+                // Show only a subset of pages if there are too many
+                if (
+                    i === 1 || 
+                    i === totalPages || 
+                    (i >= currentPage - 1 && i <= currentPage + 1)
+                ) {
+                    const pageButton = document.createElement('button');
+                    pageButton.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
+                    pageButton.textContent = i;
+                    
+                    // Add ellipsis before if needed
+                    if (i === currentPage - 2 && i > 2) {
+                        const ellipsis = document.createElement('span');
+                        ellipsis.textContent = '...';
+                        ellipsis.style.margin = '0 5px';
+                        ellipsis.style.alignSelf = 'center';
+                        paginationContainer.appendChild(ellipsis);
+                    }
+                    
+                    pageButton.addEventListener('click', () => {
+                        currentPage = i;
+                        renderMovies();
+                        renderPagination();
+                        updateCounts();
+                        window.scrollTo({top: 0, behavior: 'smooth'});
+                    });
+                    
+                    paginationContainer.appendChild(pageButton);
+                    
+                    // Add ellipsis after if needed
+                    if (i === currentPage + 2 && i < totalPages - 1) {
+                        const ellipsis = document.createElement('span');
+                        ellipsis.textContent = '...';
+                        ellipsis.style.margin = '0 5px';
+                        ellipsis.style.alignSelf = 'center';
+                        paginationContainer.appendChild(ellipsis);
+                    }
+                }
+            }
+            
+            // Next button
+            const nextButton = document.createElement('button');
+            nextButton.className = `pagination-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextButton.textContent = 'Next →';
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderMovies();
+                    renderPagination();
+                    updateCounts();
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                }
+            });
+            paginationContainer.appendChild(nextButton);
+        }
+        
+        // Function to update the movie counts
+        function updateCounts() {
+            const startIndex = (currentPage - 1) * moviesPerPage + 1;
+            const endIndex = Math.min(startIndex + moviesPerPage - 1, filteredMovies.length);
+            
+            if (filteredMovies.length > 0) {
+                currentCountSpan.textContent = `${startIndex}-${endIndex}`;
+            } else {
+                currentCountSpan.textContent = '0';
+            }
+            
+            totalCountSpan.textContent = filteredMovies.length;
+        }
     </script>
 </body>
 </html>
