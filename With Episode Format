@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(s){s.dataset.zone='10258241',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<script>(function(s){s.dataset.zone='10260349',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<script>(function(s){s.dataset.zone='10258242',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download Movie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            padding: 20px;
+        }
+        .download-container {
+            background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 700px; width: 100%; padding: 40px; text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .header { margin-bottom: 30px; }
+        .header h1 { color: #333; margin-bottom: 10px; font-size: 28px; }
+        .movie-info {
+            background: #f8f9ff; border-radius: 15px; padding: 20px; margin: 25px 0;
+            border-left: 5px solid #667eea; text-align: left;
+        }
+        .movie-detail {
+            display: flex; justify-content: space-between; margin: 8px 0;
+            font-size: 16px; color: #555;
+        }
+        .movie-detail span:first-child { font-weight: 600; color: #333; }
+        .episode-selector {
+            display: flex; justify-content: center; align-items: center;
+            margin: 20px 0; gap: 15px;
+        }
+        .episode-btn {
+            background: #eef2ff; border: 2px solid #667eea; color: #667eea;
+            width: 45px; height: 45px; border-radius: 50%; font-weight: bold;
+            font-size: 18px; cursor: pointer; transition: all 0.3s;
+        }
+        .episode-btn:hover {
+            background: #dce4ff; transform: scale(1.05);
+        }
+        .episode-btn.active {
+            background: #667eea; color: white; transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .episode-nav {
+            display: flex; justify-content: space-between; margin: 25px 0;
+        }
+        .nav-btn {
+            padding: 12px 25px; background: #667eea; color: white;
+            border: none; border-radius: 30px; font-size: 16px;
+            font-weight: 600; cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .nav-btn:hover {
+            background: #5a67d8; transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(102, 126, 234, 0.3);
+        }
+        .nav-btn:disabled {
+            background: #c3c8e0; cursor: not-allowed; transform: none;
+            box-shadow: none;
+        }
+        .timer-container {
+            margin: 30px 0; padding: 25px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px; color: white; position: relative; overflow: hidden;
+        }
+        .timer-container h2 { margin: 0 0 15px 0; font-size: 22px; }
+        #countdown { font-size: 48px; font-weight: bold; margin: 15px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .progress-bar {
+            height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px;
+            margin-top: 20px; overflow: hidden;
+        }
+        .progress-fill { height: 100%; background: white; width: 0%; border-radius: 4px; transition: width 1s linear; }
+        .download-section { margin: 30px 0; display: none; animation: slideUp 0.5s ease; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .download-btn {
+            display: inline-block; padding: 18px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; border: none; border-radius: 50px; font-size: 20px;
+            font-weight: bold; margin: 10px; transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(102,126,234,0.3);
+            cursor: pointer; width: 100%; max-width: 300px;
+        }
+        .download-btn:hover {
+            transform: translateY(-5px); box-shadow: 0 15px 30px rgba(102,126,234,0.4);
+        }
+        .home-btn {
+            display: inline-block; padding: 12px 30px; background: #667eea;
+            color: white; text-decoration: none; border-radius: 50px;
+            font-size: 16px; font-weight: 600; margin: 10px 0; transition: all 0.3s;
+            width: 100%; max-width: 250px;
+        }
+        .home-btn:hover { background: #5a62a8; transform: translateY(-3px); }
+        .ad-note {
+            margin-top: 25px; padding: 15px; background: #e9ecef;
+            border-radius: 10px; font-size: 14px; color: #666;
+        }
+        .loading {
+            display: flex; justify-content: center; align-items: center;
+            flex-direction: column;
+        }
+        .loader {
+            border: 5px solid #f3f3f3; border-top: 5px solid #667eea;
+            border-radius: 50%; width: 50px; height: 50px;
+            animation: spin 1s linear infinite; margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .warning {
+            color: #e74c3c; font-weight: 600; margin-top: 20px;
+            background: #fdf2f2; padding: 10px; border-radius: 5px;
+            display: none;
+        }
+        .button-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        .current-episode {
+            font-size: 18px; font-weight: 600; color: #667eea;
+            margin: 15px 0; padding: 10px;
+            background: #f0f4ff; border-radius: 10px;
+        }
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .download-container { padding: 25px 20px; border-radius: 15px; }
+            .header h1 { font-size: 24px; }
+            #countdown { font-size: 36px; }
+            .timer-container { padding: 20px; }
+            .movie-info { padding: 15px; }
+            .download-btn { padding: 15px 30px; font-size: 18px; max-width: 100%; }
+            .home-btn { padding: 10px 25px; font-size: 15px; max-width: 200px; }
+            .episode-btn { width: 40px; height: 40px; font-size: 16px; }
+            .nav-btn { padding: 10px 20px; font-size: 14px; }
+        }
+        @media (max-width: 480px) {
+            .download-container { padding: 20px 15px; margin: 10px 0; }
+            .header h1 { font-size: 22px; }
+            #countdown { font-size: 32px; }
+            .movie-detail { font-size: 14px; flex-direction: column; align-items: flex-start; }
+            .movie-detail span:last-child { margin-top: 2px; font-weight: 500; }
+            .download-btn { padding: 14px 25px; font-size: 16px; }
+            .ad-note { font-size: 13px; padding: 12px; }
+            .home-btn { padding: 10px 20px; font-size: 14px; max-width: 180px; }
+            .episode-selector { flex-wrap: wrap; gap: 10px; }
+            .episode-btn { width: 35px; height: 35px; font-size: 14px; }
+            .nav-btn { padding: 8px 15px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="download-container">
+        <div class="header">
+            <h1><i class="fas fa-download"></i> Movie Series Download</h1>
+            <p>Select an episode to download</p>
+        </div>
+        
+        <div class="movie-info" id="movieInfo">
+            <h3 style="margin-top: 0; color: #333;"><i class="fas fa-film"></i> Loading Movie Series...</h3>
+        </div>
+        
+        <div class="episode-selector">
+            <div class="current-episode" id="currentEpisodeDisplay">
+                Episode 1
+            </div>
+            <div class="episode-buttons" id="episodeButtons">
+                <!-- Episode buttons will be generated here -->
+            </div>
+        </div>
+        
+        <div class="episode-nav">
+            <button class="nav-btn" id="prevEpisodeBtn" disabled>
+                <i class="fas fa-chevron-left"></i> Previous Episode
+            </button>
+            <button class="nav-btn" id="nextEpisodeBtn">
+                Next Episode <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <div class="timer-container">
+            <h2><i class="fas fa-clock"></i> Please Wait</h2>
+            <p>Download for <span id="episodeName">Episode 1</span> will be available in:</p>
+            <div id="countdown">5</div>
+            <p>This helps us maintain our servers</p>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <div class="loading" id="loadingSection">
+                <div class="loader"></div>
+                <p>Preparing your download...</p>
+            </div>
+        </div>
+        
+        <div class="download-section" id="downloadSection">
+            <h2><i class="fas fa-check-circle" style="color: #27ae60;"></i> Ready to Download!</h2>
+            <p>Click the button below to download <span id="downloadEpisodeName">Episode 1</span></p>
+            
+            <button class="download-btn" id="downloadBtn">
+                <i class="fas fa-download"></i> Download Episode Now
+            </button>
+            
+            <div class="ad-note">
+                <i class="fas fa-ad"></i> <strong>Note:</strong> Clicking will open an ad in a new tab and take you to the download page.
+            </div>
+        </div>
+        
+        <div class="warning" id="popupWarning">
+            <i class="fas fa-exclamation-triangle"></i> Pop-up was blocked! Please allow pop-ups for this site and try again.
+        </div>
+        
+        <div class="button-container">
+            <a href="https://watch.boldilocks.xyz/" class="home-btn">
+                <i class="fas fa-film"></i> More Movies
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // ==================== CONFIGURATION ====================
+        // REPLACE THESE WITH YOUR 5 ACTUAL MONETAG AD LINKS
+        const monetagAdLinks = [
+            "https://otieu.com/4/8251888",
+            "https://otieu.com/4/7512585", 
+            "https://otieu.com/4/8257954",
+            "https://otieu.com/4/1415254",
+            "https://otieu.com/4/7512545"
+        ];
+        
+        // Your final safefile.cc download pages for each episode
+        // REPLACE THESE WITH ACTUAL LINKS FOR EACH EPISODE
+        const episodeDownloadPages = [
+            "https://safefile.cc/Container/W6NRWDOQ1M.html",  // Episode 1
+            "https://safefile.cc/Container/W6NRWDOQ2M.html",  // Episode 2
+            "https://safefile.cc/Container/W6NRWDOQ3M.html",  // Episode 3
+            "https://safefile.cc/Container/W6NRWDOQ4M.html",  // Episode 4
+            "https://safefile.cc/Container/W6NRWDOQ5M.html"   // Episode 5
+        ];
+        
+        // Episode data - you can customize this
+        const episodeData = [
+            { 
+                name: "Episode 1: The Beginning", 
+                size: "1.2 GB", 
+                quality: "1080p HD", 
+                format: "MP4",
+                description: "The story begins with an unexpected discovery."
+            },
+            { 
+                name: "Episode 2: Rising Conflict", 
+                size: "1.4 GB", 
+                quality: "1080p HD", 
+                format: "MP4",
+                description: "Tensions rise as the mystery deepens."
+            },
+            { 
+                name: "Episode 3: Climax", 
+                size: "1.5 GB", 
+                quality: "1080p HD", 
+                format: "MP4",
+                description: "The story reaches its peak intensity."
+            },
+            { 
+                name: "Episode 4: Falling Action", 
+                size: "1.3 GB", 
+                quality: "1080p HD", 
+                format: "MP4",
+                description: "Consequences unfold from previous events."
+            },
+            { 
+                name: "Episode 5: Resolution", 
+                size: "1.6 GB", 
+                quality: "1080p HD", 
+                format: "MP4",
+                description: "The final chapter brings closure to the story."
+            }
+        ];
+        
+        // ==================== INITIAL SETUP ====================
+        // Get movie name from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieName = urlParams.get('movie') || "Halimuyak";
+        let currentEpisode = 0; // Start with episode 1 (index 0)
+        
+        // DOM elements
+        const countdownElement = document.getElementById('countdown');
+        const progressFill = document.getElementById('progressFill');
+        const downloadSection = document.getElementById('downloadSection');
+        const loadingSection = document.getElementById('loadingSection');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const movieInfoElement = document.getElementById('movieInfo');
+        const popupWarning = document.getElementById('popupWarning');
+        const episodeButtonsContainer = document.getElementById('episodeButtons');
+        const prevEpisodeBtn = document.getElementById('prevEpisodeBtn');
+        const nextEpisodeBtn = document.getElementById('nextEpisodeBtn');
+        const currentEpisodeDisplay = document.getElementById('currentEpisodeDisplay');
+        const episodeNameElement = document.getElementById('episodeName');
+        const downloadEpisodeNameElement = document.getElementById('downloadEpisodeName');
+        
+        // ==================== EPISODE MANAGEMENT ====================
+        // Create episode buttons
+        function createEpisodeButtons() {
+            episodeButtonsContainer.innerHTML = '';
+            
+            for (let i = 0; i < episodeData.length; i++) {
+                const button = document.createElement('button');
+                button.className = 'episode-btn';
+                button.textContent = i + 1;
+                button.dataset.episode = i;
+                
+                if (i === currentEpisode) {
+                    button.classList.add('active');
+                }
+                
+                button.addEventListener('click', () => {
+                    selectEpisode(i);
+                });
+                
+                episodeButtonsContainer.appendChild(button);
+            }
+        }
+        
+        // Select a specific episode
+        function selectEpisode(episodeIndex) {
+            if (episodeIndex < 0 || episodeIndex >= episodeData.length) return;
+            
+            currentEpisode = episodeIndex;
+            
+            // Update active button
+            const buttons = document.querySelectorAll('.episode-btn');
+            buttons.forEach((btn, index) => {
+                if (index === currentEpisode) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Update episode info display
+            updateEpisodeInfo();
+            
+            // Update navigation buttons
+            updateNavigationButtons();
+            
+            // Reset timer if it's already finished
+            resetTimer();
+            
+            console.log(`Selected episode: ${currentEpisode + 1} - ${episodeData[currentEpisode].name}`);
+        }
+        
+        // Update episode information display
+        function updateEpisodeInfo() {
+            const episode = episodeData[currentEpisode];
+            
+            currentEpisodeDisplay.textContent = `Episode ${currentEpisode + 1}`;
+            episodeNameElement.textContent = `Episode ${currentEpisode + 1}`;
+            downloadEpisodeNameElement.textContent = `Episode ${currentEpisode + 1}`;
+            
+            movieInfoElement.innerHTML = `
+                <h3 style="margin-top: 0; color: #333;"><i class="fas fa-film"></i> ${movieName} - ${episode.name}</h3>
+                <div class="movie-detail">
+                    <span><i class="fas fa-hdd"></i> File Size:</span>
+                    <span>${episode.size}</span>
+                </div>
+                <div class="movie-detail">
+                    <span><i class="fas fa-video"></i> Quality:</span>
+                    <span>${episode.quality}</span>
+                </div>
+                <div class="movie-detail">
+                    <span><i class="fas fa-file"></i> Format:</span>
+                    <span>${episode.format}</span>
+                </div>
+                <div class="movie-detail">
+                    <span><i class="fas fa-info-circle"></i> Description:</span>
+                    <span>${episode.description}</span>
+                </div>
+            `;
+        }
+        
+        // Update navigation buttons state
+        function updateNavigationButtons() {
+            prevEpisodeBtn.disabled = currentEpisode === 0;
+            nextEpisodeBtn.disabled = currentEpisode === episodeData.length - 1;
+        }
+        
+        // Navigate to previous episode
+        prevEpisodeBtn.addEventListener('click', () => {
+            if (currentEpisode > 0) {
+                selectEpisode(currentEpisode - 1);
+            }
+        });
+        
+        // Navigate to next episode
+        nextEpisodeBtn.addEventListener('click', () => {
+            if (currentEpisode < episodeData.length - 1) {
+                selectEpisode(currentEpisode + 1);
+            }
+        });
+        
+        // ==================== AD ROTATION FUNCTION ====================
+        function getRandomAdLink() {
+            const randomIndex = Math.floor(Math.random() * monetagAdLinks.length);
+            return monetagAdLinks[randomIndex];
+        }
+        
+        // ==================== MAIN DOWNLOAD FUNCTION ====================
+        // THIS IS THE CRITICAL FUNCTION THAT HANDLES THE REDIRECT
+        function startDownloadProcess() {
+            console.log(`Download button clicked for episode ${currentEpisode + 1}!`);
+            
+            // Get the download page for the current episode
+            const downloadPage = episodeDownloadPages[currentEpisode];
+            console.log(`Selected download page: ${downloadPage}`);
+            
+            // Get a random ad link
+            const adUrl = getRandomAdLink();
+            console.log("Selected ad URL:", adUrl);
+            
+            // Try to open the ad in a new tab
+            const newTab = window.open(adUrl, '_blank');
+            
+            // Check if the pop-up was blocked
+            if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
+                console.warn("Ad pop-up was blocked by the browser!");
+                popupWarning.style.display = 'block';
+                
+                // Optional: Ask user to allow pop-ups and try again
+                setTimeout(() => {
+                    if(confirm("Pop-up blocked! Please allow pop-ups for this site and click OK to try again.")) {
+                        startDownloadProcess();
+                    }
+                }, 300);
+                return; // Stop further execution
+            }
+            
+            console.log("Ad opened successfully, now redirecting to download page...");
+            
+            // IMMEDIATELY redirect the current page to the episode's download page
+            window.location.href = downloadPage;
+        }
+        
+        // ==================== SETUP DOWNLOAD BUTTON ====================
+        downloadBtn.addEventListener('click', startDownloadProcess);
+        
+        // ==================== TIMER MANAGEMENT ====================
+        let countdown = 5;
+        let countdownInterval;
+        
+        function startTimer() {
+            clearInterval(countdownInterval);
+            
+            countdown = 5;
+            countdownElement.textContent = countdown;
+            progressFill.style.width = '0%';
+            
+            // Hide download section, show loading
+            downloadSection.style.display = 'none';
+            loadingSection.style.display = 'flex';
+            
+            countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                // Update progress bar
+                const progress = 100 - (countdown * 20);
+                progressFill.style.width = `${progress}%`;
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    
+                    // Show download section
+                    loadingSection.style.display = 'none';
+                    downloadSection.style.display = 'block';
+                    
+                    // Update page title
+                    document.title = `Download ${movieName} - Episode ${currentEpisode + 1}`;
+                    
+                    console.log(`Timer finished for episode ${currentEpisode + 1}. Download button is now active.`);
+                }
+            }, 1000);
+        }
+        
+        function resetTimer() {
+            // If timer was already finished, restart it
+            if (countdown <= 0) {
+                startTimer();
+            }
+        }
+        
+        // ==================== INITIALIZE PAGE ====================
+        function initializePage() {
+            // Create episode buttons
+            createEpisodeButtons();
+            
+            // Set initial episode info
+            updateEpisodeInfo();
+            
+            // Set up navigation buttons
+            updateNavigationButtons();
+            
+            // Start the timer
+            startTimer();
+            
+            // Browser console messages
+            console.log("=== Movie Series Download Page Loaded ===");
+            console.log("Movie:", movieName);
+            console.log("Number of episodes:", episodeData.length);
+            console.log("Current episode:", currentEpisode + 1);
+            console.log("Episode download pages:", episodeDownloadPages);
+            console.log("Number of ad links:", monetagAdLinks.length);
+            console.log("To test: 1) Select episode, 2) Wait for timer, 3) Click download button");
+        }
+        
+        // Initialize the page when loaded
+        window.addEventListener('DOMContentLoaded', initializePage);
+        
+        // Simple ad-block detection (optional)
+        setTimeout(() => {
+            const ad = document.createElement('div');
+            ad.className = 'ads ad-placement';
+            ad.style.height = '1px';
+            ad.style.width = '1px';
+            ad.style.position = 'absolute';
+            ad.style.left = '-100px';
+            document.body.appendChild(ad);
+            
+            setTimeout(() => {
+                if (ad.offsetHeight === 0) {
+                    console.log("Note: Ad-blocker may be active");
+                }
+                document.body.removeChild(ad);
+            }, 100);
+        }, 2000);
+    </script>
+</body>
+</html>
