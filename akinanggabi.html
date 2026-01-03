@@ -1,180 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>(function(s){s.dataset.zone='10258241',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<script>(function(s){s.dataset.zone='10260349',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<script>(function(s){s.dataset.zone='10258242',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Download Movie</title>
+    <title>Stream Movie</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0f0f1e;
+            color: #fff;
             min-height: 100vh;
-            display: flex; justify-content: center; align-items: center;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
             padding: 20px;
+            background-image: radial-gradient(circle at 20% 30%, rgba(76, 0, 130, 0.15) 0%, transparent 50%),
+                            radial-gradient(circle at 80% 80%, rgba(0, 100, 200, 0.1) 0%, transparent 50%);
         }
-        .download-container {
-            background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 600px; width: 100%; padding: 40px; text-align: center;
+        .stream-container {
+            background: rgba(25, 25, 40, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-width: 900px;
+            width: 100%;
+            overflow: hidden;
             animation: fadeIn 0.5s ease;
+            border: 1px solid rgba(100, 100, 200, 0.1);
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .header { margin-bottom: 30px; }
-        .header h1 { color: #333; margin-bottom: 10px; font-size: 28px; }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        .header h1 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 32px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .header p {
+            opacity: 0.9;
+            font-size: 18px;
+        }
+        .movie-poster {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .movie-poster::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, rgba(25, 25, 40, 1), transparent);
+        }
+        .play-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+        .play-icon:hover {
+            transform: scale(1.1);
+            background: white;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+        }
         .movie-info {
-            background: #f8f9ff; border-radius: 15px; padding: 20px; margin: 25px 0;
-            border-left: 5px solid #667eea; text-align: left;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            background: rgba(35, 35, 55, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .movie-detail {
-            display: flex; justify-content: space-between; margin: 8px 0;
-            font-size: 16px; color: #555;
+        .info-card {
+            background: rgba(45, 45, 65, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
         }
-        .movie-detail span:first-child { font-weight: 600; color: #333; }
+        .info-card h3 {
+            color: #a3b4ff;
+            margin-bottom: 8px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .info-card p {
+            font-size: 20px;
+            font-weight: 600;
+        }
         .timer-container {
-            margin: 30px 0; padding: 25px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            border-radius: 15px; color: white; position: relative; overflow: hidden;
+            padding: 30px;
+            text-align: center;
+            background: rgba(20, 20, 35, 0.8);
         }
-        .timer-container h2 { margin: 0 0 15px 0; font-size: 22px; }
-        #countdown { font-size: 48px; font-weight: bold; margin: 15px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .timer-container h2 {
+            color: #a3b4ff;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        #countdown {
+            font-size: 72px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+            text-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
         .progress-bar {
-            height: 8px; background: rgba(255,255,255,0.3); border-radius: 4px;
-            margin-top: 20px; overflow: hidden;
+            height: 10px;
+            background: rgba(100, 100, 150, 0.2);
+            border-radius: 5px;
+            margin: 30px auto;
+            max-width: 500px;
+            overflow: hidden;
         }
-        .progress-fill { height: 100%; background: white; width: 0%; border-radius: 4px; transition: width 1s linear; }
-        .download-section { margin: 30px 0; display: none; animation: slideUp 0.5s ease; }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            border-radius: 5px;
+            transition: width 1s linear;
+        }
+        .stream-section {
+            padding: 40px 30px;
+            text-align: center;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .download-btn {
-            display: inline-block; padding: 18px 40px;
+        .watch-btn {
+            display: inline-block;
+            padding: 20px 50px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white; border: none; border-radius: 50px; font-size: 20px;
-            font-weight: bold; margin: 10px; transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(102,126,234,0.3);
-            cursor: pointer; width: 100%; max-width: 300px;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            text-decoration: none;
         }
-        .download-btn:hover {
-            transform: translateY(-5px); box-shadow: 0 15px 30px rgba(102,126,234,0.4);
+        .watch-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
         }
-        .home-btn {
-            display: inline-block; padding: 12px 30px; background: #667eea;
-            color: white; text-decoration: none; border-radius: 50px;
-            font-size: 16px; font-weight: 600; margin: 10px 0; transition: all 0.3s;
-            width: 100%; max-width: 250px;
-        }
-        .home-btn:hover { background: #5a62a8; transform: translateY(-3px); }
-        .ad-note {
-            margin-top: 25px; padding: 15px; background: #e9ecef;
-            border-radius: 10px; font-size: 14px; color: #666;
-        }
-        .loading {
-            display: flex; justify-content: center; align-items: center;
-            flex-direction: column;
-        }
-        .loader {
-            border: 5px solid #f3f3f3; border-top: 5px solid #667eea;
-            border-radius: 50%; width: 50px; height: 50px;
-            animation: spin 1s linear infinite; margin-bottom: 20px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .warning {
-            color: #e74c3c; font-weight: 600; margin-top: 20px;
-            background: #fdf2f2; padding: 10px; border-radius: 5px;
-            display: none;
-        }
-        .button-container {
-            margin-top: 30px;
+        .quality-options {
             display: flex;
             justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .quality-btn {
+            padding: 12px 25px;
+            background: rgba(45, 45, 65, 0.8);
+            border: 2px solid #667eea;
+            border-radius: 50px;
+            color: #a3b4ff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .quality-btn:hover, .quality-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        .player-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 30px auto;
+            background: black;
+            border-radius: 10px;
+            overflow: hidden;
+            display: none;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+        }
+        .player-placeholder {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+            color: #aaa;
+            font-size: 20px;
+        }
+        .additional-info {
+            padding: 30px;
+            background: rgba(35, 35, 55, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .info-item {
+            background: rgba(45, 45, 65, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .info-item h4 {
+            color: #a3b4ff;
+            margin-bottom: 5px;
+        }
+        .button-container {
+            padding: 30px;
+            text-align: center;
+            background: rgba(20, 20, 35, 0.8);
+        }
+        .home-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+        .home-btn:hover {
+            background: #5a62a8;
+            transform: translateY(-3px);
+        }
+        .warning {
+            color: #ff6b6b;
+            font-weight: 600;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 8px;
+            display: none;
+            border-left: 4px solid #ff6b6b;
         }
         @media (max-width: 768px) {
             body { padding: 10px; }
-            .download-container { padding: 25px 20px; border-radius: 15px; }
-            .header h1 { font-size: 24px; }
-            #countdown { font-size: 36px; }
+            .stream-container { border-radius: 15px; }
+            .header h1 { font-size: 26px; }
+            .header { padding: 20px; }
+            #countdown { font-size: 56px; }
+            .movie-info { padding: 20px; grid-template-columns: 1fr; }
             .timer-container { padding: 20px; }
-            .movie-info { padding: 15px; }
-            .download-btn { padding: 15px 30px; font-size: 18px; max-width: 100%; }
-            .home-btn { padding: 10px 25px; font-size: 15px; max-width: 200px; }
+            .watch-btn { padding: 18px 40px; font-size: 20px; }
+            .player-placeholder { height: 250px; }
+            .play-icon { width: 80px; height: 80px; font-size: 30px; }
         }
         @media (max-width: 480px) {
-            .download-container { padding: 20px 15px; margin: 10px 0; }
             .header h1 { font-size: 22px; }
-            #countdown { font-size: 32px; }
-            .movie-detail { font-size: 14px; flex-direction: column; align-items: flex-start; }
-            .movie-detail span:last-child { margin-top: 2px; font-weight: 500; }
-            .download-btn { padding: 14px 25px; font-size: 16px; }
-            .ad-note { font-size: 13px; padding: 12px; }
-            .home-btn { padding: 10px 20px; font-size: 14px; max-width: 180px; }
+            #countdown { font-size: 48px; }
+            .watch-btn { padding: 16px 30px; font-size: 18px; margin: 10px 0; }
+            .quality-options { gap: 10px; }
+            .quality-btn { padding: 10px 20px; font-size: 14px; }
+            .home-btn { padding: 12px 30px; font-size: 16px; }
         }
     </style>
 </head>
 <body>
-    <div class="download-container">
+    <div class="stream-container">
         <div class="header">
-            <h1><i class="fas fa-download"></i> Movie Download</h1>
-            <p>Your download will start shortly</p>
+            <h1><i class="fas fa-play-circle"></i> Stream Movie Online</h1>
+            <p>Watch in high quality instantly</p>
         </div>
         
-        <div class="movie-info" id="movieInfo">
-            <h3 style="margin-top: 0; color: #333;"><i class="fas fa-film"></i> Loading Movie...</h3>
+        <div class="movie-poster">
+            <div class="play-icon" id="playBtn">
+                <i class="fas fa-play"></i>
+            </div>
+        </div>
+        
+        <div class="movie-info">
+            <div class="info-card">
+                <h3><i class="fas fa-film"></i> Movie</h3>
+                <p id="movieTitle">Akin ang Gabi</p>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-video"></i> Quality</h3>
+                <p>1080p HD</p>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-clock"></i> Duration</h3>
+                <p>2h 15m</p>
+            </div>
+            <div class="info-card">
+                <h3><i class="fas fa-globe"></i> Language</h3>
+                <p>English + Subtitles</p>
+            </div>
         </div>
         
         <div class="timer-container">
-            <h2><i class="fas fa-clock"></i> Please Wait</h2>
-            <p>Download will be available in:</p>
-            <div id="countdown">5</div>
-            <p>This helps us maintain our servers</p>
+            <h2><i class="fas fa-clock"></i> Stream will start in:</h2>
+            <div id="countdown">10</div>
+            <p>Preparing your viewing experience...</p>
             
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
             
-            <div class="loading" id="loadingSection">
-                <div class="loader"></div>
-                <p>Preparing your download...</p>
-            </div>
+            <p><i class="fas fa-info-circle"></i> This short wait ensures optimal streaming quality</p>
         </div>
         
-        <div class="download-section" id="downloadSection">
-            <h2><i class="fas fa-check-circle" style="color: #27ae60;"></i> Ready to Download!</h2>
-            <p>Click the button below to proceed</p>
+        <div class="stream-section" id="streamSection">
+            <h2><i class="fas fa-check-circle" style="color: #4CAF50;"></i> Ready to Watch!</h2>
+            <p>Choose your streaming quality and start watching</p>
             
-            <button class="download-btn" id="downloadBtn">
-                <i class="fas fa-download"></i> Download Movie Now
+            <div class="quality-options">
+                <div class="quality-btn active" data-quality="1080">1080p HD</div>
+                <div class="quality-btn" data-quality="720">720p HD</div>
+                <div class="quality-btn" data-quality="480">480p SD</div>
+                <div class="quality-btn" data-quality="360">360p</div>
+            </div>
+            
+            <button class="watch-btn" id="watchBtn">
+                <i class="fas fa-play"></i> Start Streaming Now
             </button>
             
-            <div class="ad-note">
-                <i class="fas fa-ad"></i> <strong>Note:</strong> Clicking will open an ad in a new tab and take you to the download page.
+            <div class="warning" id="popupWarning">
+                <i class="fas fa-exclamation-triangle"></i> Pop-up was blocked! Please allow pop-ups for this site to watch the movie.
             </div>
         </div>
         
-        <div class="warning" id="popupWarning">
-            <i class="fas fa-exclamation-triangle"></i> Pop-up was blocked! Please allow pop-ups for this site and try again.
+        <div class="player-container" id="playerContainer">
+            <div class="player-placeholder">
+                <div>
+                    <i class="fas fa-spinner fa-spin fa-3x" style="margin-bottom: 20px; color: #667eea;"></i>
+                    <p>Loading player...</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="additional-info">
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4><i class="fas fa-info-circle"></i> Stream Info</h4>
+                    <p>This movie is streamed directly from our secure servers. No downloads required.</p>
+                </div>
+                <div class="info-item">
+                    <h4><i class="fas fa-wifi"></i> Recommended Connection</h4>
+                    <p>5 Mbps internet speed for HD quality streaming.</p>
+                </div>
+                <div class="info-item">
+                    <h4><i class="fas fa-shield-alt"></i> Safe Streaming</h4>
+                    <p>Protected streaming with no malware or unwanted downloads.</p>
+                </div>
+                <div class="info-item">
+                    <h4><i class="fas fa-question-circle"></i> Need Help?</h4>
+                    <p>If the stream doesn't start, try refreshing the page or check your connection.</p>
+                </div>
+            </div>
         </div>
         
         <div class="button-container">
             <a href="https://watch.boldilocks.xyz/" class="home-btn">
-                <i class="fas fa-film"></i> More Movies
+                <i class="fas fa-film"></i> Browse More Movies
+            </a>
+            <a href="#" class="home-btn" id="fullscreenBtn">
+                <i class="fas fa-expand"></i> Go Fullscreen
             </a>
         </div>
     </div>
 
     <script>
         // ==================== CONFIGURATION ====================
-        // REPLACE THESE WITH YOUR 5 ACTUAL MONETAG AD LINKS
+        // AD LINKS FOR MONETIZATION
         const monetagAdLinks = [
             "https://otieu.com/4/8251888",
             "https://otieu.com/4/7512585", 
@@ -183,8 +406,8 @@
             "https://otieu.com/4/7512545"
         ];
         
-        // Your final safefile.cc download page
-        const FINAL_DOWNLOAD_PAGE = "https://play.boldilocks.xyz/akinanggabi";
+        // Your streaming page URL
+        const STREAMING_PAGE = "https://play.boldilocks.xyz/akinanggabi";
         
         // ==================== INITIAL SETUP ====================
         // Get movie name from URL
@@ -194,35 +417,18 @@
         // DOM elements
         const countdownElement = document.getElementById('countdown');
         const progressFill = document.getElementById('progressFill');
-        const downloadSection = document.getElementById('downloadSection');
-        const loadingSection = document.getElementById('loadingSection');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const movieInfoElement = document.getElementById('movieInfo');
+        const streamSection = document.getElementById('streamSection');
+        const watchBtn = document.getElementById('watchBtn');
+        const playBtn = document.getElementById('playBtn');
+        const movieTitle = document.getElementById('movieTitle');
         const popupWarning = document.getElementById('popupWarning');
+        const playerContainer = document.getElementById('playerContainer');
+        const qualityButtons = document.querySelectorAll('.quality-btn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
         
-        // Movie data (simplified - in production, get from localStorage or API)
-        const movieData = {
-            size: "980 MB",
-            quality: "1080p HD",
-            format: "MP4"
-        };
-        
-        // ==================== DISPLAY MOVIE INFO ====================
-        movieInfoElement.innerHTML = `
-            <h3 style="margin-top: 0; color: #333;"><i class="fas fa-film"></i> ${movieName}</h3>
-            <div class="movie-detail">
-                <span><i class="fas fa-hdd"></i> File Size:</span>
-                <span>${movieData.size}</span>
-            </div>
-            <div class="movie-detail">
-                <span><i class="fas fa-video"></i> Quality:</span>
-                <span>${movieData.quality}</span>
-            </div>
-            <div class="movie-detail">
-                <span><i class="fas fa-file"></i> Format:</span>
-                <span>${movieData.format}</span>
-            </div>
-        `;
+        // Set movie title
+        movieTitle.textContent = movieName;
+        document.title = `Stream ${movieName} Online`;
         
         // ==================== AD ROTATION FUNCTION ====================
         function getRandomAdLink() {
@@ -230,90 +436,142 @@
             return monetagAdLinks[randomIndex];
         }
         
-        // ==================== MAIN DOWNLOAD FUNCTION ====================
-        // THIS IS THE CRITICAL FUNCTION THAT HANDLES THE REDIRECT
-        function startDownloadProcess() {
-            console.log("Download button clicked!");
+        // ==================== QUALITY SELECTION ====================
+        qualityButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                qualityButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update streaming quality in UI
+                const quality = this.getAttribute('data-quality');
+                console.log(`Streaming quality set to: ${quality}p`);
+            });
+        });
+        
+        // ==================== STREAMING FUNCTION WITH ADS ====================
+        function startStreaming() {
+            console.log("Starting movie stream...");
+            
+            // Show loading player
+            playerContainer.style.display = 'block';
+            streamSection.style.display = 'none';
+            
+            // Get selected quality
+            const selectedQuality = document.querySelector('.quality-btn.active').getAttribute('data-quality');
+            console.log(`Selected quality: ${selectedQuality}p`);
             
             // Get a random ad link
             const adUrl = getRandomAdLink();
             console.log("Selected ad URL:", adUrl);
             
             // Try to open the ad in a new tab
-            const newTab = window.open(adUrl, '_blank');
+            const adTab = window.open(adUrl, '_blank');
             
             // Check if the pop-up was blocked
-            if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
-                console.warn("Ad pop-up was blocked by the browser!");
+            if (!adTab || adTab.closed || typeof adTab.closed == 'undefined') {
+                console.warn("Pop-up was blocked by the browser!");
                 popupWarning.style.display = 'block';
                 
-                // Optional: Ask user to allow pop-ups and try again
+                // Show streaming section again
+                playerContainer.style.display = 'none';
+                streamSection.style.display = 'block';
+                
+                // Ask user to allow pop-ups
                 setTimeout(() => {
-                    if(confirm("Pop-up blocked! Please allow pop-ups for this site and click OK to try again.")) {
-                        startDownloadProcess();
+                    if(confirm("Pop-up was blocked! Please allow pop-ups for this site and click OK to try again.")) {
+                        startStreaming();
                     }
                 }, 300);
                 return; // Stop further execution
             }
             
-            console.log("Ad opened successfully, now redirecting to safefile.cc...");
+            console.log("Opening streaming page...");
             
-            // IMMEDIATELY redirect the current page to safefile.cc
-            window.location.href = FINAL_DOWNLOAD_PAGE;
+            // Update player UI
+            const placeholder = document.querySelector('.player-placeholder');
+            placeholder.innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin fa-3x" style="margin-bottom: 20px; color: #667eea;"></i>
+                    <h3>Opening your movie...</h3>
+                    <p>Please wait a moment</p>
+                </div>
+            `;
+            
+            // After a short delay, redirect to the streaming page
+            setTimeout(() => {
+                window.location.href = STREAMING_PAGE;
+            }, 1500);
         }
         
-        // ==================== SETUP DOWNLOAD BUTTON ====================
-        downloadBtn.addEventListener('click', startDownloadProcess);
+        // ==================== SETUP BUTTONS ====================
+        watchBtn.addEventListener('click', startStreaming);
+        playBtn.addEventListener('click', function() {
+            // If timer is finished, start streaming
+            if (streamSection.style.display === 'block') {
+                startStreaming();
+            } else {
+                // Otherwise, just scroll to the streaming section
+                streamSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+        
+        // Fullscreen button
+        fullscreenBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
         
         // ==================== COUNTDOWN TIMER ====================
-        let countdown = 5;
+        let countdown = 10;
         const countdownInterval = setInterval(() => {
             countdown--;
             countdownElement.textContent = countdown;
             
             // Update progress bar
-            const progress = 100 - (countdown * 20);
+            const progress = 100 - (countdown * 10);
             progressFill.style.width = `${progress}%`;
             
             if (countdown <= 0) {
                 clearInterval(countdownInterval);
                 
-                // Show download section
-                loadingSection.style.display = 'none';
-                downloadSection.style.display = 'block';
+                // Show streaming options
+                streamSection.style.display = 'block';
                 
-                // Update page title
-                document.title = `Download ${movieName}`;
+                // Update UI
+                document.querySelector('.timer-container h2').innerHTML = '<i class="fas fa-check-circle"></i> Stream Ready!';
+                document.querySelector('.timer-container p').textContent = 'You can now start streaming the movie';
                 
-                console.log("Timer finished. Download button is now active.");
+                console.log("Timer finished. Streaming options are now available.");
             }
         }, 1000);
         
         // ==================== BROWSER CONSOLE MESSAGES ====================
-        console.log("=== Movie Download Page Loaded ===");
+        console.log("=== Movie Streaming Page Loaded ===");
         console.log("Movie:", movieName);
-        console.log("Final Download Page:", FINAL_DOWNLOAD_PAGE);
+        console.log("Streaming Page:", STREAMING_PAGE);
         console.log("Number of ad links:", monetagAdLinks.length);
-        console.log("To test: 1) Wait for timer, 2) Click download button");
-        console.log("Expected: Ad opens in new tab + This page goes to safefile.cc");
+        console.log("To watch: 1) Wait for timer, 2) Select quality, 3) Click 'Start Streaming'");
+        console.log("Expected: Ad opens in new tab → Then redirect to streaming page");
         
-        // Simple ad-block detection (optional)
-        setTimeout(() => {
-            const ad = document.createElement('div');
-            ad.className = 'ads ad-placement';
-            ad.style.height = '1px';
-            ad.style.width = '1px';
-            ad.style.position = 'absolute';
-            ad.style.left = '-100px';
-            document.body.appendChild(ad);
-            
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate play button on load
             setTimeout(() => {
-                if (ad.offsetHeight === 0) {
-                    console.log("Note: Ad-blocker may be active");
-                }
-                document.body.removeChild(ad);
-            }, 100);
-        }, 2000);
+                playBtn.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    playBtn.style.transform = 'scale(1)';
+                }, 300);
+            }, 1000);
+        });
     </script>
 </body>
 </html>
